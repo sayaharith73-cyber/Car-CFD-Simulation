@@ -13,10 +13,21 @@ Change the values below to experiment with:
 - Numerical resolution
 - Flow-driving acceleration
 - Number of iterations
+
+Instructions for changing the values : 
+
+- nx, ny: increase the grid size for a finer numerical representation. This increases computational cost.
+- body_length, body_height: change the size of the simplified obstacle in lattice nodes.
+- body_corner_radius: change how rounded the body corners are.
+- body_x_fraction: move the obstacle along the domain.
+- acceleration_x: controls how strongly the fluid is driven through the periodic domain.
+- relaxation_time: controls the lattice viscosity. Values too close to 0.5 can cause numerical instability.
+- max_iterations: maximum number of iterations before the simulation stops.
+- convergence_tolerance: a target for the change in mean velocity, not proof that every aspect of the flow has converged.
+
 """
 
 from dataclasses import dataclass
-
 
 @dataclass
 class CFDConfig:
