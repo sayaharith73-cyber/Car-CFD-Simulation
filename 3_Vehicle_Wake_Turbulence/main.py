@@ -73,3 +73,43 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+"""
+
+This connects the geometry generator, solver, and wake-analysis modules.
+
+One important detail: the inlet velocity must come from config.py, not be hardcoded in the solver. Make the following small adjustment in solver.py before running:
+
+Change the boundary function to:
+
+
+python
+def apply_velocity_boundaries(u, v, solid, inlet_velocity):
+
+    u[:, 0] = inlet_velocity
+    v[:, 0] = 0.0
+
+    u[:, -1] = u[:, -2]
+    v[:, -1] = v[:, -2]
+
+    u[0, :] = 0.0
+    u[-1, :] = 0.0
+    v[0, :] = 0.0
+    v[-1, :] = 0.0
+
+    u[solid] = 0.0
+    v[solid] = 0.0
+
+    return u, v
+Then replace each call to apply_velocity_boundaries in solver.py with:
+
+
+python
+apply_velocity_boundaries(u, v, solid, cfg.inlet_velocity)
+Use the same change for u_star and v_star.
+
+Now create main.py:
+
+"""
