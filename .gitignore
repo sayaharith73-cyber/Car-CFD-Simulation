@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.DS_Store
+
+# Keep the results folder, but ignore generated files
+# unless you deliberately choose to commit selected results.
+**/results/*
+!**/results/.gitkeep
